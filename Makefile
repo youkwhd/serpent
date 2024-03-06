@@ -6,7 +6,7 @@ CXXFLAGS  = -Wall -Wextra
 LD        = g++
 
 SRC      := $(wildcard *.cpp)
-DEPS     := $(wildcard *.hpp)
+DEPS     := $(wildcard *.h)
 OBJ      := $(SRC:.cpp=.o)
 
 all: $(EXE)
