@@ -1,7 +1,12 @@
 #include <iostream>
 
+#include "board.h"
+
 int main(void)
 {
-    std::cout << "C++ is bloated" << std::endl;
+    board::Board *board = new board::Board;
+    board->__hello("C++");
+    delete board;
+
     return 0;
 }
