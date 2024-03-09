@@ -2,3 +2,13 @@ serpent
 =======
 
 The classical snake game
+
+Dependencies
+------------
+
+- raylib
+
+Quick Start
+-----------
+
+    make && ./serpent
