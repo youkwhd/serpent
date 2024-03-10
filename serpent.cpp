@@ -4,13 +4,49 @@
 
 #include "apple.h"
 #include "position.h"
+#include "serpent.h"
 #include "snake.h"
 
-#define WINDOW_WIDTH 800
-#define WINDOW_HEIGHT 440
+static int counter = 0;
 
-#define CELL_WIDTH 20
-#define CELL_HEIGHT 20
+namespace serpent
+{
+    void draw(serpent::Snake &snake, serpent::Apple apple)
+    {
+        BeginDrawing();
+        ClearBackground(BLACK);
+
+        DrawRectangle(apple.pos.x * 20, apple.pos.y * 20, CELL_WIDTH-1, CELL_HEIGHT-1, RED);
+
+        for (serpent::Snake::Block &b : snake.body) {
+            DrawRectangle(b.pos.x * 20, b.pos.y * 20, CELL_WIDTH-1, CELL_HEIGHT-1, snake.color);
+        }
+
+        counter++;
+
+        EndDrawing();
+    }
+
+    void update(serpent::Snake &snake, serpent::Apple apple)
+    {
+        if (counter < 8) {
+            return;
+        }
+
+        for (serpent::Snake::Block &b : snake.body) {
+            b.pos.move(b.dir);
+
+            b.pos.x %= (WINDOW_WIDTH / 20);
+            b.pos.y %= (WINDOW_HEIGHT / 20);
+        }
+
+        if (snake.head().pos.x == apple.pos.x && snake.head().pos.y == apple.pos.y) {
+            snake.eat();
+        }
+
+        counter = 0;
+    }
+}
 
 int main(void)
 {
@@ -25,36 +61,9 @@ int main(void)
     InitWindow(WINDOW_WIDTH, WINDOW_HEIGHT, "serpent");
     SetTargetFPS(60);
 
-    int counter = 0;
-
     while (!WindowShouldClose()) {
-        BeginDrawing();
-        ClearBackground(BLACK);
-
-        DrawRectangle(apple.pos.x * 20, apple.pos.y * 20, CELL_WIDTH-1, CELL_HEIGHT-1, RED);
-
-        counter++;
-
-        for (serpent::Snake::Block &b : snake.body) {
-            DrawRectangle(b.pos.x * 20, b.pos.y * 20, CELL_WIDTH-1, CELL_HEIGHT-1, snake.color);
-        }
-
-        if (counter >= 8) {
-            for (serpent::Snake::Block &b : snake.body) {
-                b.pos.move(b.dir);
-
-                b.pos.x %= (WINDOW_WIDTH / 20);
-                b.pos.y %= (WINDOW_HEIGHT / 20);
-            }
-
-            if (snake.head().pos.x == apple.pos.x && snake.head().pos.y == apple.pos.y) {
-                snake.eat();
-            }
-
-            counter = 0;
-        }
-
-        EndDrawing();
+        serpent::draw(snake, apple);
+        serpent::update(snake, apple);
     }
 
     CloseWindow();
