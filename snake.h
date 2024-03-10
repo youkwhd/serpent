@@ -5,7 +5,10 @@
 #include <raylib.h>
 #include <vector>
 
+#include "direction.h"
 #include "position.h"
+
+using namespace serpent::direction;
 
 namespace serpent
 {
@@ -15,12 +18,29 @@ namespace serpent
          */
         std::uint16_t width, height;
 
-        Color color;
-        std::vector<serpent::Position> body;
-
         public:
+            class Block
+            {
+                public:
+                    serpent::Position pos;
+                    Direction dir;
+
+                    Block(serpent::Position pos, Direction dir);
+                    Block(serpent::Position pos);
+            };
+
+            Color color;
+            std::vector<serpent::Snake::Block> body;
+            std::uint16_t length;
+
             Snake(Color color, std::uint16_t width, std::uint16_t height);
             Snake(std::uint16_t width, std::uint16_t height);
             Snake();
+
+            Block &head();
+            Block &tail();
+
+            void eat();
+            void eat(std::uint16_t n);
     };
 }
