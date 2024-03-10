@@ -1,9 +1,9 @@
 EXE       = serpent
 
-CXX       = g++
+CXX       = clang++
 CXXFLAGS  = -Wall -Wextra
 
-LD        = g++
+LD        = clang++
 LDLIBS    = -lraylib
 
 SRC      := $(wildcard *.cpp)
