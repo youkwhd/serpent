@@ -13,29 +13,32 @@
 int main(void)
 {
     serpent::Snake snake;
+    snake.eat();
 
     InitWindow(WINDOW_WIDTH, WINDOW_HEIGHT, "serpent");
     SetTargetFPS(60);
 
-    int v = 0;
     int counter = 0;
 
     while (!WindowShouldClose()) {
         BeginDrawing();
-
         ClearBackground(BLACK);
 
+        DrawRectangle(20, 0, CELL_WIDTH-1, CELL_HEIGHT-1, RED);
         counter++;
 
-        DrawRectangle(20, 0, CELL_WIDTH-1, CELL_HEIGHT-1, RED);
+        for (serpent::Snake::Block &b : snake.body) {
+            DrawRectangle(b.pos.x * 20, b.pos.y * 20, CELL_WIDTH-1, CELL_HEIGHT-1, snake.color);
 
-        DrawRectangle((v-20) % WINDOW_WIDTH, 0, CELL_WIDTH-1, CELL_HEIGHT-1, GREEN);
-        DrawRectangle((v-40) % WINDOW_WIDTH, 0, CELL_WIDTH-1, CELL_HEIGHT-1, GREEN);
-        DrawRectangle((v-60) % WINDOW_WIDTH, 0, CELL_WIDTH-1, CELL_HEIGHT-1, GREEN);
-        DrawRectangle((v) % WINDOW_WIDTH, 0, CELL_WIDTH-1, CELL_HEIGHT-1, GREEN);
+            if (counter >= 40) {
+                b.pos.move(b.dir);
 
-        if (counter >= 10) {
-            v += 20;
+                b.pos.x %= (WINDOW_WIDTH / 20);
+                b.pos.y %= (WINDOW_HEIGHT / 20);
+            }
+        }
+
+        if (counter >= 40) {
             counter = 0;
         }
 
