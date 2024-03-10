@@ -63,4 +63,11 @@ namespace serpent
             Snake::eat();
         }
     }
+
+    void Snake::move()
+    {
+        for (int i = this->length - 1; i > 0; i--) {
+            this->body[i].dir = this->body[i - 1].dir;
+        }
+    }
 }
