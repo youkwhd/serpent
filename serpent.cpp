@@ -11,7 +11,7 @@ static int counter = 0;
 
 namespace serpent
 {
-    void draw(serpent::Snake &snake, serpent::Apple apple)
+    void draw(serpent::Snake &snake, serpent::Apple &apple)
     {
         BeginDrawing();
         ClearBackground(BLACK);
@@ -27,7 +27,7 @@ namespace serpent
         EndDrawing();
     }
 
-    void update(serpent::Snake &snake, serpent::Apple apple)
+    void update(serpent::Snake &snake, serpent::Apple &apple)
     {
         if (counter < 8) {
             return;
@@ -41,6 +41,7 @@ namespace serpent
         }
 
         if (snake.head().pos.x == apple.pos.x && snake.head().pos.y == apple.pos.y) {
+            apple.__reposition(snake, WINDOW_WIDTH / 20, WINDOW_HEIGHT / 20);
             snake.eat();
         }
 
@@ -54,9 +55,9 @@ int main(void)
 
     serpent::Snake snake;
     serpent::Apple apple;
-    apple.pos.y = 1;
 
     snake.eat();
+    apple.__reposition(snake, WINDOW_WIDTH / 20, WINDOW_HEIGHT / 20);
 
     InitWindow(WINDOW_WIDTH, WINDOW_HEIGHT, "serpent");
     SetTargetFPS(60);

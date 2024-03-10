@@ -1,6 +1,8 @@
 #pragma once
 
 #include "position.h"
+#include "snake.h"
+
 #include <cstdint>
 #include <iostream>
 
@@ -13,5 +15,12 @@ namespace serpent
             serpent::Position pos;
 
             Apple();
+            void reposition(std::uint16_t max_x, std::uint16_t max_y);
+            void reposition();
+
+            /* TODO: what the fuck is this?
+             * cut the snake reference (use iterable)
+             */
+            void __reposition(serpent::Snake &s, std::uint16_t max_x, std::uint16_t max_y);
     };
 }
