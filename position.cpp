@@ -16,5 +16,3 @@ namespace serpent
         this->x -= dir == DIRECTION_LEFT;
     }
 }
-
-
