@@ -5,3 +5,5 @@
 
 #define CELL_WIDTH 20
 #define CELL_HEIGHT 20
+
+#define MOD(a, b) ((((a) % (b)) + (b)) % (b))

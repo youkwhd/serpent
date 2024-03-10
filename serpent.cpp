@@ -1,12 +1,16 @@
+#include <cmath>
 #include <ctime>
 #include <iostream>
 #include <raylib.h>
 
 #include "apple.h"
+#include "direction.h"
 #include "position.h"
 #include "serpent.h"
 #include "snake.h"
 
+static bool paused = false;
+static bool allowed_move = true;
 static int counter = 0;
 
 namespace serpent
@@ -29,23 +33,72 @@ namespace serpent
 
     void update(serpent::Snake &snake, serpent::Apple &apple)
     {
-        if (counter < 8) {
+        if (IsKeyPressed(KEY_SPACE)) {
+            paused = !paused;
+        }
+
+        if (paused) {
+            return;
+        }
+
+        serpent::Snake::Block &__head = snake.head();
+
+        if (allowed_move) {
+            if (IsKeyPressed(KEY_W) && __head.dir != direction::DIRECTION_DOWN) {
+                __head.dir = direction::DIRECTION_UP;
+                allowed_move = false;
+                goto q;
+            }
+
+            if (IsKeyPressed(KEY_A) && __head.dir != direction::DIRECTION_RIGHT) {
+                __head.dir = direction::DIRECTION_LEFT;
+                allowed_move = false;
+                goto q;
+            }
+
+            if (IsKeyPressed(KEY_S) && __head.dir != direction::DIRECTION_UP) {
+                __head.dir = direction::DIRECTION_DOWN;
+                allowed_move = false;
+                goto q;
+            }
+
+            if (IsKeyPressed(KEY_D) && __head.dir != direction::DIRECTION_LEFT) {
+                __head.dir = direction::DIRECTION_RIGHT;
+                allowed_move = false;
+                goto q;
+            }
+        }
+        /* if (counter < 8) { */
+        /*     return; */
+        /* } */
+
+q:
+        if (counter % 5 != 0) {
             return;
         }
 
         for (serpent::Snake::Block &b : snake.body) {
             b.pos.move(b.dir);
 
-            b.pos.x %= (WINDOW_WIDTH / 20);
-            b.pos.y %= (WINDOW_HEIGHT / 20);
+            b.pos.x = MOD(b.pos.x, WINDOW_WIDTH / 20);
+            b.pos.y = MOD(b.pos.y, WINDOW_HEIGHT / 20);
         }
 
-        if (snake.head().pos.x == apple.pos.x && snake.head().pos.y == apple.pos.y) {
+       snake.move();
+
+        for (int i = 1; i < snake.length; i++) {
+            if (__head.pos == snake.body[i].pos) {
+                paused = true;
+                break;
+            }
+        }
+
+        if (__head.pos == apple.pos) {
             apple.__reposition(snake, WINDOW_WIDTH / 20, WINDOW_HEIGHT / 20);
             snake.eat();
         }
 
-        counter = 0;
+        allowed_move = true;
     }
 }
 
@@ -56,10 +109,11 @@ int main(void)
     serpent::Snake snake;
     serpent::Apple apple;
 
-    snake.eat();
+    snake.eat(10);
     apple.__reposition(snake, WINDOW_WIDTH / 20, WINDOW_HEIGHT / 20);
 
     InitWindow(WINDOW_WIDTH, WINDOW_HEIGHT, "serpent");
+    SetExitKey(KEY_Q);
     SetTargetFPS(60);
 
     while (!WindowShouldClose()) {

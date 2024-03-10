@@ -1,4 +1,5 @@
 #include "apple.h"
+#include "serpent.h"
 
 namespace serpent
 {
@@ -10,8 +11,8 @@ namespace serpent
 
     void Apple::reposition(std::uint16_t max_x, std::uint16_t max_y)
     {
-        this->pos.x = std::rand() % max_x;
-        this->pos.y = std::rand() % max_y;
+        this->pos.x = MOD(std::rand(), max_x);
+        this->pos.y = MOD(std::rand(), max_y);
     }
 
     void Apple::reposition()
