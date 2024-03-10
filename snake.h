@@ -1,13 +1,26 @@
 #pragma once
 
+#include <cstdint>
 #include <iostream>
+#include <raylib.h>
+#include <vector>
+
+#include "position.h"
 
 namespace serpent
 {
-    struct Snake
+    class Snake
     {
+        /* size for each of the body parts
+         */
+        std::uint16_t width, height;
+
+        Color color;
+        std::vector<serpent::Position> body;
+
         public:
-            void __hello(const std::string to);
+            Snake(Color color, std::uint16_t width, std::uint16_t height);
+            Snake(std::uint16_t width, std::uint16_t height);
+            Snake();
     };
 }
-
