@@ -3,7 +3,7 @@
 
 #include "board.h"
 
-#define WINDOW_WIDTH 700
+#define WINDOW_WIDTH 800
 #define WINDOW_HEIGHT 450
 
 int main(void)
@@ -15,11 +15,21 @@ int main(void)
     InitWindow(WINDOW_WIDTH, WINDOW_HEIGHT, "serpent");
     SetTargetFPS(60);
 
+    int n_cell = (WINDOW_WIDTH - 20) / CELL_WIDTH;
+
     while (!WindowShouldClose()) {
         BeginDrawing();
 
         ClearBackground(BLACK);
-        DrawLine(10, 10, 100, 10, WHITE);
+
+        for (int i = 0; i < n_cell; i++) {
+            int posx = (i * CELL_WIDTH) + 10;
+            int endposx = posx + CELL_WIDTH;
+            DrawLine(posx, 10, endposx, 10, RAYWHITE);
+            DrawLine(posx, 10, posx, 10 + CELL_HEIGHT, RAYWHITE);
+            DrawLine(posx + CELL_WIDTH, 10, posx + CELL_WIDTH, 10 + CELL_HEIGHT, RAYWHITE);
+            DrawLine(posx, 10 + CELL_WIDTH, posx + CELL_WIDTH, 10 + CELL_WIDTH, RAYWHITE);
+        }
 
         EndDrawing();
     }
