@@ -14,6 +14,8 @@ namespace serpent
 
             Position(int x = 0, int y = 0);
             void move(Direction dir);
+
+            inline bool operator==(const Position& p) { return p.x == x && p.y == y; }
     };
 }
 
