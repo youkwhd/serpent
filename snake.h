@@ -2,15 +2,12 @@
 
 #include <iostream>
 
-namespace board
+namespace serpent
 {
-
-#define CELL_WIDTH 20
-#define CELL_HEIGHT 20
-
-    struct Board
+    struct Snake
     {
         public:
             void __hello(const std::string to);
     };
 }
+

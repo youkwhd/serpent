@@ -1,45 +1,41 @@
 #include <iostream>
 #include <raylib.h>
 
-#include "board.h"
-
 #define WINDOW_WIDTH 800
 #define WINDOW_HEIGHT 440
 
+#define CELL_WIDTH 20
+#define CELL_HEIGHT 20
+
 int main(void)
 {
-    board::Board *board = new board::Board;
-    board->__hello("C++");
-    delete board;
-
     InitWindow(WINDOW_WIDTH, WINDOW_HEIGHT, "serpent");
     SetTargetFPS(60);
 
-    int n_cell = (WINDOW_WIDTH - 20) / CELL_WIDTH;
-    int board_height = (WINDOW_HEIGHT - 20) / CELL_HEIGHT;
+    int v = 0;
+    int counter = 0;
 
     while (!WindowShouldClose()) {
         BeginDrawing();
 
         ClearBackground(BLACK);
 
-        for (int i = 0; i < board_height; i++) {
-            int posy = (i * CELL_HEIGHT) + 10;
+        counter++;
 
-            for (int j = 0; j < n_cell; j++) {
-                int posx = (j * CELL_WIDTH) + 10;
+        DrawRectangle(20, 20, CELL_WIDTH-1, CELL_HEIGHT-1, RED);
+        DrawRectangle(v-20, 20, CELL_WIDTH-1, CELL_HEIGHT-1, GREEN);
+        DrawRectangle(v-40, 20, CELL_WIDTH-1, CELL_HEIGHT-1, GREEN);
+        DrawRectangle(v-60, 20, CELL_WIDTH-1, CELL_HEIGHT-1, GREEN);
+        DrawRectangle(v, 20, CELL_WIDTH-1, CELL_HEIGHT-1, GREEN);
 
-                DrawLine(posx, posy, posx + CELL_WIDTH, posy, RAYWHITE);
-                DrawLine(posx, posy, posx, posy + CELL_HEIGHT, RAYWHITE);
-                DrawLine(posx + CELL_WIDTH, posy, posx + CELL_WIDTH, posy + CELL_HEIGHT, RAYWHITE);
-                DrawLine(posx, posy + CELL_WIDTH, posx + CELL_WIDTH, posy + CELL_WIDTH, RAYWHITE);
-            }
+        if (counter >= 10) {
+            v += 20;
+            counter = 0;
         }
 
         EndDrawing();
     }
 
-    std::cout << board_height << std::endl;
     CloseWindow();
     return 0;
 }
