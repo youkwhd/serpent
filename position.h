@@ -4,7 +4,7 @@
 
 namespace serpent
 {
-    struct Position
+    class Position
     {
         int x, y;
 
