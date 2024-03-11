@@ -98,24 +98,38 @@ q:
 
         allowed_move = true;
     }
+
+    void init_game_state()
+    {
+        snake.eat(3);
+        apple.reposition_and_avoid_snake(MAX_X, MAX_Y, snake);
+    }
+
+    void init_raylib()
+    {
+        InitWindow(WINDOW_WIDTH, WINDOW_HEIGHT, "serpent");
+        SetExitKey(KEY_Q);
+        SetTargetFPS(60);
+    }
+
+    void deinit_raylib()
+    {
+        CloseWindow();
+    }
 }
 
 int main(void)
 {
     std::srand(std::time(nullptr));
 
-    snake.eat(3);
-    apple.reposition_and_avoid_snake(MAX_X, MAX_Y, snake);
-
-    InitWindow(WINDOW_WIDTH, WINDOW_HEIGHT, "serpent");
-    SetExitKey(KEY_Q);
-    SetTargetFPS(60);
+    serpent::init_game_state();
+    serpent::init_raylib();
 
     while (!WindowShouldClose()) {
         serpent::draw();
         serpent::update();
     }
 
-    CloseWindow();
+    serpent::deinit_raylib();
     return 0;
 }
