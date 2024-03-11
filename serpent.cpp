@@ -47,25 +47,25 @@ namespace serpent
         serpent::Snake::Block &__head = snake.head();
 
         if (allowed_move) {
-            if (IsKeyPressed(KEY_W) && __head.dir != direction::DIRECTION_DOWN) {
+            if (IsKeyPressed(KEY_W) && __head.dir != direction::to_opposite(direction::DIRECTION_UP)) {
                 __head.dir = direction::DIRECTION_UP;
                 allowed_move = false;
                 goto q;
             }
 
-            if (IsKeyPressed(KEY_A) && __head.dir != direction::DIRECTION_RIGHT) {
+            if (IsKeyPressed(KEY_A) && __head.dir != direction::to_opposite(direction::DIRECTION_LEFT)) {
                 __head.dir = direction::DIRECTION_LEFT;
                 allowed_move = false;
                 goto q;
             }
 
-            if (IsKeyPressed(KEY_S) && __head.dir != direction::DIRECTION_UP) {
+            if (IsKeyPressed(KEY_S) && __head.dir != direction::to_opposite(direction::DIRECTION_DOWN)) {
                 __head.dir = direction::DIRECTION_DOWN;
                 allowed_move = false;
                 goto q;
             }
 
-            if (IsKeyPressed(KEY_D) && __head.dir != direction::DIRECTION_LEFT) {
+            if (IsKeyPressed(KEY_D) && __head.dir != direction::to_opposite(direction::DIRECTION_RIGHT)) {
                 __head.dir = direction::DIRECTION_RIGHT;
                 allowed_move = false;
                 goto q;
