@@ -20,6 +20,8 @@ namespace serpent
 
             /* TODO: what the fuck is this?
              * cut the snake reference (use iterable)
+             *
+             * void reposition(std::uint16_t max_x, std::uint16_t max_y, ??::iterable<serpent::Position> avoid); 
              */
             void reposition_and_avoid_snake(std::uint16_t max_x, std::uint16_t max_y, serpent::Snake &s);
     };
