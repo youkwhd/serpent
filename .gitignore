@@ -1,4 +1,4 @@
 serpent
 serpent.exe
 
-*.o
+src/*.o
