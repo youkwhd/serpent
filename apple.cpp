@@ -21,15 +21,15 @@ namespace serpent
         this->pos.y = std::rand();
     }
 
-    void Apple::__reposition(serpent::Snake &s, std::uint16_t max_x, std::uint16_t max_y)
+    void Apple::reposition_and_avoid_snake(std::uint16_t max_x, std::uint16_t max_y, serpent::Snake &s)
     {
         this->reposition(max_x, max_y);
 
-__reposition:
+repeat:
         for (auto b : s.body) {
             if (this->pos == b.pos) {
                 this->reposition(max_x, max_y);
-                goto __reposition;
+                goto repeat;
             }
         }
     }

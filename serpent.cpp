@@ -13,17 +13,20 @@ static bool paused = false;
 static bool allowed_move = true;
 static int counter = 0;
 
+static serpent::Snake snake;
+static serpent::Apple apple;
+
 namespace serpent
 {
-    void draw(serpent::Snake &snake, serpent::Apple &apple)
+    void draw()
     {
         BeginDrawing();
         ClearBackground(BLACK);
 
-        DrawRectangle(apple.pos.x * 20, apple.pos.y * 20, CELL_WIDTH-1, CELL_HEIGHT-1, RED);
+        DrawRectangle(apple.pos.x * BLOCK_WIDTH, apple.pos.y * BLOCK_HEIGHT, BLOCK_WIDTH-1, BLOCK_HEIGHT-1, RED);
 
         for (serpent::Snake::Block &b : snake.body) {
-            DrawRectangle(b.pos.x * 20, b.pos.y * 20, CELL_WIDTH-1, CELL_HEIGHT-1, snake.color);
+            DrawRectangle(b.pos.x * BLOCK_WIDTH, b.pos.y * BLOCK_HEIGHT, BLOCK_WIDTH-1, BLOCK_HEIGHT-1, snake.color);
         }
 
         counter++;
@@ -31,7 +34,7 @@ namespace serpent
         EndDrawing();
     }
 
-    void update(serpent::Snake &snake, serpent::Apple &apple)
+    void update()
     {
         if (IsKeyPressed(KEY_SPACE)) {
             paused = !paused;
@@ -77,8 +80,8 @@ q:
         for (serpent::Snake::Block &b : snake.body) {
             b.pos.move(b.dir);
 
-            b.pos.x = MOD(b.pos.x, WINDOW_WIDTH / 20);
-            b.pos.y = MOD(b.pos.y, WINDOW_HEIGHT / 20);
+            b.pos.x = MOD(b.pos.x, MAX_X);
+            b.pos.y = MOD(b.pos.y, MAX_Y);
         }
 
        snake.change_directions();
@@ -89,7 +92,7 @@ q:
        }
 
         if (__head.pos == apple.pos) {
-            apple.__reposition(snake, WINDOW_WIDTH / 20, WINDOW_HEIGHT / 20);
+            apple.reposition_and_avoid_snake(MAX_X, MAX_Y, snake);
             snake.eat();
         }
 
@@ -101,19 +104,16 @@ int main(void)
 {
     std::srand(std::time(nullptr));
 
-    serpent::Snake snake;
-    serpent::Apple apple;
-
-    snake.eat(10);
-    apple.__reposition(snake, WINDOW_WIDTH / 20, WINDOW_HEIGHT / 20);
+    snake.eat(3);
+    apple.reposition_and_avoid_snake(MAX_X, MAX_Y, snake);
 
     InitWindow(WINDOW_WIDTH, WINDOW_HEIGHT, "serpent");
     SetExitKey(KEY_Q);
     SetTargetFPS(60);
 
     while (!WindowShouldClose()) {
-        serpent::draw(snake, apple);
-        serpent::update(snake, apple);
+        serpent::draw();
+        serpent::update();
     }
 
     CloseWindow();

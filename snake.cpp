@@ -1,4 +1,5 @@
 #include "snake.h"
+#include "serpent.h"
 #include "direction.h"
 #include "position.h"
 #include <vector>
@@ -28,7 +29,7 @@ namespace serpent
     {
     }
 
-    Snake::Snake(): Snake(GREEN, 20, 20)
+    Snake::Snake(): Snake(GREEN, BLOCK_WIDTH, BLOCK_HEIGHT)
     {
     }
 
