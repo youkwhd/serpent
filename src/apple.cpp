@@ -5,8 +5,7 @@ namespace serpent
 {
     Apple::Apple()
     {
-        this->pos.x = std::rand();
-        this->pos.y = std::rand();
+        this->reposition();
     }
 
     void Apple::reposition(std::uint16_t max_x, std::uint16_t max_y)
