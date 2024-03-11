@@ -64,10 +64,23 @@ namespace serpent
         }
     }
 
-    void Snake::move()
+    void Snake::change_directions()
     {
         for (int i = this->length - 1; i > 0; i--) {
             this->body[i].dir = this->body[i - 1].dir;
         }
+    }
+
+    bool Snake::is_head_collide()
+    {
+        Snake::Block &head = this->head();
+
+        for (int i = 1; i < this->length; i++) {
+            if (head.pos == this->body[i].pos) {
+                return true;
+            }
+        }
+
+        return false;
     }
 }

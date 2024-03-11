@@ -68,9 +68,6 @@ namespace serpent
                 goto q;
             }
         }
-        /* if (counter < 8) { */
-        /*     return; */
-        /* } */
 
 q:
         if (counter % 5 != 0) {
@@ -84,14 +81,12 @@ q:
             b.pos.y = MOD(b.pos.y, WINDOW_HEIGHT / 20);
         }
 
-       snake.move();
+       snake.change_directions();
 
-        for (int i = 1; i < snake.length; i++) {
-            if (__head.pos == snake.body[i].pos) {
-                paused = true;
-                break;
-            }
-        }
+       if (snake.is_head_collide()) {
+           paused = true;
+           return;
+       }
 
         if (__head.pos == apple.pos) {
             apple.__reposition(snake, WINDOW_WIDTH / 20, WINDOW_HEIGHT / 20);
