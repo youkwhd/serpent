@@ -1,13 +1,13 @@
 EXE       = serpent
 
 CXX       = clang++
-CXXFLAGS  = -Wall -Wextra
+CXXFLAGS  = -Wall -Wextra -Iinclude
 
 LD        = clang++
 LDLIBS    = -lraylib
 
-SRC      := $(wildcard *.cpp)
-DEPS     := $(wildcard *.h)
+SRC      := $(wildcard src/*.cpp)
+DEPS     := $(wildcard include/*.h)
 OBJ      := $(SRC:.cpp=.o)
 
 all: $(EXE)
