@@ -6,15 +6,20 @@
 #include <cstdint>
 #include <iostream>
 
+#include <raylib.h>
+
 namespace serpent
 {
     class Apple
     {
         public:
             std::uint16_t width, height;
+            Color color;
             serpent::Position pos;
 
+            Apple(Color color);
             Apple();
+
             void reposition(std::uint16_t max_x, std::uint16_t max_y);
             void reposition();
 

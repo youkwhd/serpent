@@ -23,7 +23,7 @@ namespace serpent
         BeginDrawing();
         ClearBackground(BLACK);
 
-        DrawRectangle(apple.pos.x * BLOCK_WIDTH, apple.pos.y * BLOCK_HEIGHT, BLOCK_WIDTH-1, BLOCK_HEIGHT-1, RED);
+        DrawRectangle(apple.pos.x * BLOCK_WIDTH, apple.pos.y * BLOCK_HEIGHT, BLOCK_WIDTH-1, BLOCK_HEIGHT-1, apple.color);
 
         for (serpent::Snake::Block &b : snake.body) {
             DrawRectangle(b.pos.x * BLOCK_WIDTH, b.pos.y * BLOCK_HEIGHT, BLOCK_WIDTH-1, BLOCK_HEIGHT-1, snake.color);

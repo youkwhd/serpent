@@ -3,7 +3,13 @@
 
 namespace serpent
 {
-    Apple::Apple()
+    Apple::Apple(Color color)
+    {
+        this->color = color;
+        this->reposition();
+    }
+
+    Apple::Apple() : Apple(RED)
     {
         this->reposition();
     }
