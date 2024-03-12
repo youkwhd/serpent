@@ -92,8 +92,8 @@ q:
        }
 
         if (__head.pos == apple.pos) {
-            apple.reposition_and_avoid_snake(MAX_X, MAX_Y, snake);
             snake.eat();
+            apple.reposition_and_avoid_snake(MAX_X, MAX_Y, snake);
         }
 
         allowed_move = true;
