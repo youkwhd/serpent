@@ -47,6 +47,8 @@ namespace serpent
             void eat();
             void eat(std::uint16_t n);
 
+            void draw();
+
             void change_directions();
             bool is_head_collide();
     };

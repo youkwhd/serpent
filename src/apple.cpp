@@ -3,15 +3,26 @@
 
 namespace serpent
 {
-    Apple::Apple(Color color)
+    Apple::Apple(Color color, std::uint16_t width, std::uint16_t height)
     {
         this->color = color;
+        this->width = width;
+        this->height = height;
         this->reposition();
+    }
+
+    Apple::Apple(Color color) : Apple(color, BLOCK_WIDTH, BLOCK_HEIGHT)
+    {
     }
 
     Apple::Apple() : Apple(RED)
     {
         this->reposition();
+    }
+
+    void Apple::draw()
+    {
+        DrawRectangle(this->pos.x * this->width, this->pos.y * this->height, this->width - 1, this->height - 1, this->color);
     }
 
     void Apple::reposition(std::uint16_t max_x, std::uint16_t max_y)

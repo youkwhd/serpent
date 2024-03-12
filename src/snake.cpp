@@ -65,6 +65,13 @@ namespace serpent
         }
     }
 
+    void Snake::draw()
+    {
+        for (serpent::Snake::Block &b : this->body) {
+            DrawRectangle(b.pos.x * this->width, b.pos.y * this->height, this->width - 1, this->height - 1, this->color);
+        }
+    }
+
     void Snake::change_directions()
     {
         for (int i = this->length - 1; i > 0; i--) {

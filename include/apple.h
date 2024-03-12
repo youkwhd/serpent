@@ -17,8 +17,11 @@ namespace serpent
             Color color;
             serpent::Position pos;
 
+            Apple(Color color, std::uint16_t width, std::uint16_t height);
             Apple(Color color);
             Apple();
+
+            void draw();
 
             void reposition(std::uint16_t max_x, std::uint16_t max_y);
             void reposition();
