@@ -15,7 +15,7 @@ all: $(EXE)
 $(EXE): $(OBJ)
 	$(LD) $(LDLIBS) $^ -o $(EXE)
 
-%.o: %.c $(DEPS)
+src/%.o: src/%.cpp $(DEPS)
 	$(CXX) $(CXXFLAGS) -c $< -o $@
 
 clean:
