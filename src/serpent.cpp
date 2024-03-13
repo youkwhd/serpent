@@ -47,29 +47,29 @@ namespace serpent
             if (IsKeyPressed(KEY_W) && __head.dir != direction::to_opposite(direction::DIRECTION_UP)) {
                 __head.dir = direction::DIRECTION_UP;
                 allowed_move = false;
-                goto q;
+                goto update;
             }
 
             if (IsKeyPressed(KEY_A) && __head.dir != direction::to_opposite(direction::DIRECTION_LEFT)) {
                 __head.dir = direction::DIRECTION_LEFT;
                 allowed_move = false;
-                goto q;
+                goto update;
             }
 
             if (IsKeyPressed(KEY_S) && __head.dir != direction::to_opposite(direction::DIRECTION_DOWN)) {
                 __head.dir = direction::DIRECTION_DOWN;
                 allowed_move = false;
-                goto q;
+                goto update;
             }
 
             if (IsKeyPressed(KEY_D) && __head.dir != direction::to_opposite(direction::DIRECTION_RIGHT)) {
                 __head.dir = direction::DIRECTION_RIGHT;
                 allowed_move = false;
-                goto q;
+                goto update;
             }
         }
 
-q:
+update:
         if (counter % 5 != 0) {
             return;
         }
