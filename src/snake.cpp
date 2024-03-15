@@ -91,4 +91,21 @@ namespace serpent
 
         return false;
     }
+
+    void Snake::move()
+    {
+        for (serpent::Snake::Block &block : this->body) {
+            block.pos.move(block.dir);
+        }
+    }
+
+    void Snake::move(std::uint16_t max_x, std::uint16_t max_y)
+    {
+        for (serpent::Snake::Block &block : this->body) {
+            block.pos.move(block.dir);
+
+            block.pos.x = MOD(block.pos.x, max_x);
+            block.pos.y = MOD(block.pos.y, max_y);
+        }
+    }
 }

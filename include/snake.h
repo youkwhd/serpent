@@ -49,6 +49,9 @@ namespace serpent
 
             void draw();
 
+            void move();
+            void move(std::uint16_t max_x, std::uint16_t max_y);
+
             void update_direction();
             bool is_head_collide();
     };

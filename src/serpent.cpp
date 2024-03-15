@@ -74,19 +74,13 @@ update:
             return;
         }
 
-        for (serpent::Snake::Block &b : snake.body) {
-            b.pos.move(b.dir);
+        snake.move(MAX_X, MAX_Y);
+        snake.update_direction();
 
-            b.pos.x = MOD(b.pos.x, MAX_X);
-            b.pos.y = MOD(b.pos.y, MAX_Y);
+        if (snake.is_head_collide()) {
+            paused = true;
+            return;
         }
-
-       snake.update_direction();
-
-       if (snake.is_head_collide()) {
-           paused = true;
-           return;
-       }
 
         if (__head.pos == apple.pos) {
             snake.eat();
