@@ -7,13 +7,13 @@
 namespace serpent
 {
 
-    Snake::Block::Block(serpent::Position pos, Direction dir)
+    Snake::Block::Block(serpent::Position pos, serpent::direction::Direction dir)
     {
         this->pos = pos;
         this->dir = dir;
     }
 
-    Snake::Block::Block(serpent::Position pos) : Snake::Block(pos, DIRECTION_RIGHT)
+    Snake::Block::Block(serpent::Position pos) : Snake::Block(pos, serpent::direction::DIRECTION_RIGHT)
     {
     }
 

@@ -8,8 +8,6 @@
 #include "direction.h"
 #include "position.h"
 
-using namespace serpent::direction;
-
 namespace serpent
 {
     class Snake
@@ -23,9 +21,9 @@ namespace serpent
             {
                 public:
                     serpent::Position pos;
-                    Direction dir;
+                    serpent::direction::Direction dir;
 
-                    Block(serpent::Position pos, Direction dir);
+                    Block(serpent::Position pos, serpent::direction::Direction dir);
                     Block(serpent::Position pos);
             };
 

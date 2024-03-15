@@ -8,11 +8,11 @@ namespace serpent
         this->y = y;
     }
 
-    void Position::move(Direction dir)
+    void Position::move(serpent::direction::Direction dir)
     {
-        this->y += dir == DIRECTION_DOWN;
-        this->y -= dir == DIRECTION_UP;
-        this->x += dir == DIRECTION_RIGHT;
-        this->x -= dir == DIRECTION_LEFT;
+        this->y += dir == serpent::direction::DIRECTION_DOWN;
+        this->y -= dir == serpent::direction::DIRECTION_UP;
+        this->x += dir == serpent::direction::DIRECTION_RIGHT;
+        this->x -= dir == serpent::direction::DIRECTION_LEFT;
     }
 }
