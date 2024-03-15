@@ -81,7 +81,7 @@ update:
             b.pos.y = MOD(b.pos.y, MAX_Y);
         }
 
-       snake.change_directions();
+       snake.update_direction();
 
        if (snake.is_head_collide()) {
            paused = true;

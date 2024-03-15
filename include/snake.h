@@ -49,7 +49,7 @@ namespace serpent
 
             void draw();
 
-            void change_directions();
+            void update_direction();
             bool is_head_collide();
     };
 }
