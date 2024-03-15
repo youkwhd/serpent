@@ -1,6 +1,4 @@
-#include <cmath>
 #include <ctime>
-#include <iostream>
 #include <raylib.h>
 
 #include "apple.h"
