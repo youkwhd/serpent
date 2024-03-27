@@ -41,11 +41,9 @@ namespace serpent
     {
         this->reposition(max_x, max_y);
 
-repeat:
         for (auto b : s.body) {
             if (this->pos == b.pos) {
-                this->reposition(max_x, max_y);
-                goto repeat;
+                return this->reposition_and_avoid_snake(max_x, max_y, s);
             }
         }
     }
