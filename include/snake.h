@@ -30,11 +30,6 @@ namespace serpent
             Color color;
             std::vector<serpent::Snake::Block> body;
 
-            /* TODO: is this really worth the cost?
-             * could be dangerous if forgotten to update.
-             */
-            std::uint16_t length;
-
             Snake(Color color, std::uint16_t width, std::uint16_t height);
             Snake(std::uint16_t width, std::uint16_t height);
             Snake();

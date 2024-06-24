@@ -19,7 +19,6 @@ namespace serpent
 
     Snake::Snake(Color color, std::uint16_t width, std::uint16_t height)
     {
-        this->length = 0;
         this->color = color;
         this->width = width;
         this->height = height;
@@ -45,9 +44,8 @@ namespace serpent
 
     void Snake::eat()
     {
-        if (this->length == 0) {
+        if (this->body.size() == 0) {
             this->body.push_back(Snake::Block(serpent::Position(1, 1)));
-            this->length++;
             return;
         }
 
@@ -55,7 +53,6 @@ namespace serpent
         prev.pos.move(serpent::direction::to_opposite(prev.dir));
 
         this->body.push_back(prev);
-        this->length++;
     }
 
     void Snake::eat(std::uint16_t n)
@@ -74,7 +71,7 @@ namespace serpent
 
     void Snake::update_direction()
     {
-        for (int i = this->length - 1; i > 0; i--) {
+        for (size_t i = this->body.size() - 1; i > 0; i--) {
             this->body[i].dir = this->body[i - 1].dir;
         }
     }
@@ -83,7 +80,7 @@ namespace serpent
     {
         Snake::Block &head = this->head();
 
-        for (int i = 1; i < this->length; i++) {
+        for (size_t i = 1; i < this->body.size(); i++) {
             if (head.pos == this->body[i].pos) {
                 return true;
             }
